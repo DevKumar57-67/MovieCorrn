@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Netflix Recommender</title>
+    <style>
+        body {
+            background-color: #141414;
+            color: white;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1, h2 {
+            color: #E50914;
+        }
+
+        button {
+            background-color: #E50914;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #b00610;
+        }
+
+        select {
+            width: 60%;
+            padding: 10px;
+            font-size: 1em;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #E50914;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Netflix Movie Recommender</h1>
+        <form action="{% url 'recommend' %}" method="post">
+            {% csrf_token %}
+            <label for="movie">Select a movie you liked:</label><br><br>
+            <select name="movie" required>
+                {% for title in titles %}
+                    <option value="{{ title }}">{{ title }}</option>
+                {% endfor %}
+            </select><br><br>
+            <button type="submit">Recommend 🎯</button>
+        </form>
+    </div>
+</body>
+</html>
